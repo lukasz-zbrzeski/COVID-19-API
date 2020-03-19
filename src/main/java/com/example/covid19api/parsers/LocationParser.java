@@ -31,67 +31,24 @@ public class LocationParser {
     public String parseData(int index) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        // Readers
-        StringReader readerLastUpdate = new StringReader(data.getData());
-        StringReader readerCountry = new StringReader(data.getData());
-        StringReader readerRegion = new StringReader(data.getData());
-        StringReader readerLat = new StringReader(data.getData());
-        StringReader readerLon = new StringReader(data.getData());
-        StringReader readerConfirmed = new StringReader(data.getData());
-        StringReader readerDeaths = new StringReader(data.getData());
-        StringReader readerRecovered = new StringReader(data.getData());
+        StringReader stringReader = new StringReader(data.getData());
 
-        // Parsers
-        CSVParser parserLastUpdate;
-        CSVParser parserCountry;
-        CSVParser parserRegion;
-        CSVParser parserLat;
-        CSVParser parserLon;
-        CSVParser parserConfirmed;
-        CSVParser parserDeaths;
-        CSVParser parserRecovered;
+        CSVParser parser;
 
         try {
-            parserLastUpdate = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(readerLastUpdate);
-            parserCountry = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(readerCountry);
-            parserRegion = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(readerRegion);
-            parserLat = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(readerLat);
-            parserLon = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(readerLon);
-            parserConfirmed = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(readerConfirmed);
-            parserDeaths = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(readerDeaths);
-            parserRecovered = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(readerRecovered);
+            parser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(stringReader);
 
-            for (CSVRecord strings : parserLastUpdate) {
+            for (CSVRecord strings : parser) {
                 lastUpdates.add(strings.get("Last Update"));
-            }
-
-            for (CSVRecord strings : parserCountry) {
                 countries.add(strings.get("Country/Region"));
-            }
-
-            for (CSVRecord strings : parserRegion) {
                 regions.add(strings.get("Province/State"));
-            }
-
-            for (CSVRecord strings : parserLat) {
                 lats.add(Double.parseDouble(strings.get("Latitude")));
-            }
-
-            for (CSVRecord strings : parserLon) {
                 lons.add(Double.parseDouble(strings.get("Longitude")));
-            }
-
-            for (CSVRecord strings : parserConfirmed) {
                 confirmedCases.add(Integer.parseInt(strings.get("Confirmed")));
-            }
-
-            for (CSVRecord strings : parserDeaths) {
                 deathCases.add(Integer.parseInt(strings.get("Deaths")));
-            }
-
-            for (CSVRecord strings : parserRecovered) {
                 recoveredCases.add(Integer.parseInt(strings.get("Recovered")));
             }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
