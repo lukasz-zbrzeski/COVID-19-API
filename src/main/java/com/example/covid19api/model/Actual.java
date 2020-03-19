@@ -1,8 +1,5 @@
 package com.example.covid19api.model;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public class Actual {
 
     private int confirmed;
