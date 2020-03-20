@@ -1,43 +1,26 @@
 package com.example.covid19api.model;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 public class Actual {
 
-    private int confirmed;
-
-    private int deaths;
-
-    private int recovered;
+    private Map<String, Integer> data = new TreeMap<>();
 
     public Actual() {
     }
 
     public Actual(int confirmed, int deaths, int recovered) {
-        this.confirmed = confirmed;
-        this.deaths = deaths;
-        this.recovered = recovered;
+        data.put("confirmed", confirmed);
+        data.put("deaths", deaths);
+        data.put("recovered", recovered);
     }
 
-    public int getConfirmed() {
-        return confirmed;
+    public Map<String, Integer> getData() {
+        return data;
     }
 
-    public void setConfirmed(int confirmed) {
-        this.confirmed = confirmed;
-    }
-
-    public int getDeaths() {
-        return deaths;
-    }
-
-    public void setDeaths(int deaths) {
-        this.deaths = deaths;
-    }
-
-    public int getRecovered() {
-        return recovered;
-    }
-
-    public void setRecovered(int recovered) {
-        this.recovered = recovered;
+    public void setData(Map<String, Integer> data) {
+        this.data = data;
     }
 }
