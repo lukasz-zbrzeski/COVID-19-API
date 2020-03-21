@@ -16,7 +16,7 @@ public class Location {
     public Location() {
     }
 
-    public Location(String last_update, String country, String region, double lat, double lon, int confirmed, int deaths, int recovered) {
+    public Location(String last_update, String country, String region, double lat, double lon, int confirmed, int deaths, int recovered, int existing) {
         this.last_update = last_update;
 
         location.put("country", country);
@@ -28,6 +28,7 @@ public class Location {
         data.put("confirmed", confirmed);
         data.put("deaths", deaths);
         data.put("recovered", recovered);
+        data.put("existing", existing);
     }
 
     public String getLast_update() {

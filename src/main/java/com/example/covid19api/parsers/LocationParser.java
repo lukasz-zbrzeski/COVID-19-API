@@ -61,7 +61,8 @@ public class LocationParser {
                 lons.get(index),
                 confirmedCases.get(index),
                 deathCases.get(index),
-                recoveredCases.get(index)
+                recoveredCases.get(index),
+                confirmedCases.get(index) - (deathCases.get(index) + recoveredCases.get(index))
         );
         return gson.toJson(model);
     }

@@ -43,7 +43,8 @@ public class ActualParser {
         Actual model = new Actual(
                 totalConfirmed,
                 totalDeaths,
-                totalRecovered
+                totalRecovered,
+                totalConfirmed - (totalDeaths + totalRecovered)
         );
         return gson.toJson(model);
     }
