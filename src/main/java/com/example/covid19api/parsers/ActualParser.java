@@ -23,7 +23,7 @@ public class ActualParser {
         int totalDeaths = 0;
         int totalRecovered = 0;
 
-        StringReader stringReader = new StringReader(data.getData());
+        StringReader stringReader = new StringReader(data.getActualData());
 
         CSVParser parser;
 

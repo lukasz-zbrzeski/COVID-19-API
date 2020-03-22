@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Data {
-    private static final String DATA_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/" + getYesterdayDate() + ".csv";
+    private static final String ACTUAL_DATA_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/" + getYesterdayDate() + ".csv";
 
     public static String getYesterdayDate() {
         Date date = DateUtils.addDays(new Date(), -1);
@@ -15,8 +15,20 @@ public class Data {
         return dateFormat.format(date);
     }
 
-    public String getData() {
+//    public static Date getHistoricalDate() {
+//        Date date = new SimpleDateFormat("MM-dd-yyyy").parse(historicalDate);
+//        return date;
+//    }
+
+    public String getActualData() {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(DATA_URL, String.class);
+        return restTemplate.getForObject(ACTUAL_DATA_URL, String.class);
+    }
+
+    public String getHistoricalData(String date) {
+        String HISTORICAL_DATA_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/" + date + ".csv";
+
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(HISTORICAL_DATA_URL, String.class);
     }
 }

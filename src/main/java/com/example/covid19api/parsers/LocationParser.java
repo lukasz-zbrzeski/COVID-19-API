@@ -31,7 +31,7 @@ public class LocationParser {
     public String parseData(int index) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        StringReader stringReader = new StringReader(data.getData());
+        StringReader stringReader = new StringReader(data.getActualData());
 
         CSVParser parser;
 
