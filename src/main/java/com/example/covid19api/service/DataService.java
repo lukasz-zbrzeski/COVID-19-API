@@ -1,6 +1,7 @@
 package com.example.covid19api.service;
 
 import com.example.covid19api.parsers.ActualParser;
+import com.example.covid19api.parsers.HistoryParser;
 import com.example.covid19api.parsers.LocationParser;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class DataService {
     ActualParser actualParser = new ActualParser();
     LocationParser locationParser = new LocationParser();
+    HistoryParser historyParser = new HistoryParser();
 
     public String getActualData() {
         return actualParser.parseData();
@@ -27,10 +29,14 @@ public class DataService {
             if (
                     (country.equals(locationParser.getCountries().get(i))
                             && (region.equals(locationParser.getRegions().get(i)))
-            )) {
+                    )) {
                 index = i;
             }
         }
         return locationParser.parseData(index);
+    }
+
+    public String getHistoricalData(String date) {
+        return historyParser.parseData(date);
     }
 }
