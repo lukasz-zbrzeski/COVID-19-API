@@ -2,12 +2,10 @@ package com.example.covid19api.controller;
 
 import com.example.covid19api.service.DataService;
 import com.google.gson.Gson;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 @RestController
 @RequestMapping("/api")
@@ -21,8 +19,8 @@ public class DataController {
         return dataService.getActualData();
     }
 
-    @GetMapping("/location")
-    public String searchDataByLocation(@RequestParam(required = false) String country, @RequestParam(required = false) String region) {
+    @GetMapping("/actual/location")
+    public String searchActualDataByLocation(@RequestParam(required = false) String country, @RequestParam(required = false) String region) {
         if (country != null && region != null) {
             return this.dataService.searchDataByCountryAndRegion(country, region);
         } else if (country != null) {
@@ -30,14 +28,14 @@ public class DataController {
         } else if (region != null) {
             return this.dataService.searchDataByRegion(region);
         } else {
-            HashMap<String, String> errorMessage = new HashMap<>();
+            Map<String, String> errorMessage = new TreeMap<>();
             errorMessage.put("message", "Data not found!");
             return gson.toJson(errorMessage);
         }
     }
 
-    @GetMapping("/history")
-    public String history(@RequestParam String date) {
+    @GetMapping("/history/{date}")
+    public String history(@PathVariable String date) {
         return dataService.getHistoricalData(date);
     }
 }
