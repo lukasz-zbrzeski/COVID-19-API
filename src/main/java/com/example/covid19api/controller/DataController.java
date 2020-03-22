@@ -35,4 +35,9 @@ public class DataController {
             return gson.toJson(errorMessage);
         }
     }
+
+    @GetMapping("/history")
+    public String history(@RequestParam String date) {
+        return dataService.getHistoricalData(date);
+    }
 }
