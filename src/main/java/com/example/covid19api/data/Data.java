@@ -15,11 +15,6 @@ public class Data {
         return dateFormat.format(date);
     }
 
-//    public static Date getHistoricalDate() {
-//        Date date = new SimpleDateFormat("MM-dd-yyyy").parse(historicalDate);
-//        return date;
-//    }
-
     public String getActualData() {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(ACTUAL_DATA_URL, String.class);
