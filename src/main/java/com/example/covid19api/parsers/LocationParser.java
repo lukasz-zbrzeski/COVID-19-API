@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 public class LocationParser {
-    private Data data = new Data();
+    private final Data data = new Data();
 
     // Containers for records
     private List<String> lastUpdates = new ArrayList<>();

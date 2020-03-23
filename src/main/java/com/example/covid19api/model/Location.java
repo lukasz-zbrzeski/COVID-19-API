@@ -7,11 +7,11 @@ public class Location {
 
     private String last_update;
 
-    private Map<String, String> location = new TreeMap<>();
+    private final Map<String, String> location = new TreeMap<>();
 
-    private Map<String, Double> coordinates = new TreeMap<>();
+    private final Map<String, Double> coordinates = new TreeMap<>();
 
-    private Map<String, Integer> data = new TreeMap<>();
+    private final Map<String, Integer> data = new TreeMap<>();
 
     public Location() {
     }
@@ -35,31 +35,15 @@ public class Location {
         return last_update;
     }
 
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
-    }
-
     public Map<String, String> getLocation() {
         return location;
-    }
-
-    public void setLocation(Map<String, String> location) {
-        this.location = location;
     }
 
     public Map<String, Double> getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(Map<String, Double> coordinates) {
-        this.coordinates = coordinates;
-    }
-
     public Map<String, Integer> getData() {
         return data;
-    }
-
-    public void setData(Map<String, Integer> data) {
-        this.data = data;
     }
 }

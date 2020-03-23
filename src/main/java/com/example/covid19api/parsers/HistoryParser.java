@@ -14,7 +14,7 @@ import java.io.StringReader;
 
 @Service
 public class HistoryParser {
-    private Data data = new Data();
+    private final Data data = new Data();
 
     public String parseData(String date) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

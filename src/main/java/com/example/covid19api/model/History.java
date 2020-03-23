@@ -7,7 +7,7 @@ public class History {
 
     private String date;
 
-    private Map<String, Integer> data = new TreeMap<>();
+    private final Map<String, Integer> data = new TreeMap<>();
 
     public History() {
     }
@@ -25,15 +25,7 @@ public class History {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public Map<String, Integer> getData() {
         return data;
-    }
-
-    public void setData(Map<String, Integer> data) {
-        this.data = data;
     }
 }

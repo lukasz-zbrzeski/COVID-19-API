@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 public class Actual {
 
-    private Map<String, Integer> data = new TreeMap<>();
+    private final Map<String, Integer> data = new TreeMap<>();
 
     public Actual() {
     }
@@ -19,9 +19,5 @@ public class Actual {
 
     public Map<String, Integer> getData() {
         return data;
-    }
-
-    public void setData(Map<String, Integer> data) {
-        this.data = data;
     }
 }

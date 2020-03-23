@@ -10,9 +10,9 @@ import java.util.TreeMap;
 @RestController
 @RequestMapping("/api")
 public class DataController {
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
-    private DataService dataService = new DataService();
+    private final DataService dataService = new DataService();
 
     @GetMapping("/actual")
     public String actual() {
