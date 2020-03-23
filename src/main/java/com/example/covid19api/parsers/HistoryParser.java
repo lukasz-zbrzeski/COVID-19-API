@@ -25,10 +25,8 @@ public class HistoryParser {
 
         StringReader stringReader = new StringReader(data.getHistoricalData(date));
 
-        CSVParser parser;
-
         try {
-            parser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(stringReader);
+            CSVParser parser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(stringReader);
 
             for (CSVRecord strings : parser) {
                 totalConfirmed += Integer.parseInt(strings.get("Confirmed"));
