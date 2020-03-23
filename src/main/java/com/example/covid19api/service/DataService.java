@@ -11,6 +11,19 @@ public class DataService {
     private final LocationParser locationParser = new LocationParser();
     private final HistoryParser historyParser = new HistoryParser();
 
+    private int getIndex(String country, String region) {
+        int index = 0;
+        for (int i = 0; i < locationParser.getCountries().size(); i++) {
+            if (
+                    (country.equals(locationParser.getCountries().get(i))
+                            && (region.equals(locationParser.getRegions().get(i)))
+                    )) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
     public String getActualData() {
         return actualParser.parseData();
     }
@@ -24,16 +37,7 @@ public class DataService {
     }
 
     public String searchDataByCountryAndRegion(String country, String region) {
-        int index = 0;
-        for (int i = 0; i < locationParser.getCountries().size(); i++) {
-            if (
-                    (country.equals(locationParser.getCountries().get(i))
-                            && (region.equals(locationParser.getRegions().get(i)))
-                    )) {
-                index = i;
-            }
-        }
-        return locationParser.parseData(index);
+        return locationParser.parseData(getIndex(country, region));
     }
 
     public String getHistoricalData(String date) {
