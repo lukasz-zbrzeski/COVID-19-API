@@ -9,7 +9,7 @@ import java.util.Date;
 public class Data {
     private static final String ACTUAL_DATA_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/" + getYesterdayDate() + ".csv";
 
-    public static String getYesterdayDate() {
+    private static String getYesterdayDate() {
         Date date = DateUtils.addDays(new Date(), -1);
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
         return dateFormat.format(date);

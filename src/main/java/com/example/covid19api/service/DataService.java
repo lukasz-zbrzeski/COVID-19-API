@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DataService {
-    ActualParser actualParser = new ActualParser();
-    LocationParser locationParser = new LocationParser();
-    HistoryParser historyParser = new HistoryParser();
+    private ActualParser actualParser = new ActualParser();
+    private LocationParser locationParser = new LocationParser();
+    private HistoryParser historyParser = new HistoryParser();
 
     public String getActualData() {
         return actualParser.parseData();
