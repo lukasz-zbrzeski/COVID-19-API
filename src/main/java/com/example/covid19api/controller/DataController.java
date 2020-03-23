@@ -2,6 +2,7 @@ package com.example.covid19api.controller;
 
 import com.example.covid19api.service.DataService;
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -12,7 +13,12 @@ import java.util.TreeMap;
 public class DataController {
     private final Gson gson = new Gson();
 
-    private final DataService dataService = new DataService();
+    private final DataService dataService;
+
+    @Autowired
+    public DataController(DataService dataService) {
+        this.dataService = dataService;
+    }
 
     @GetMapping("/actual")
     public String actual() {
