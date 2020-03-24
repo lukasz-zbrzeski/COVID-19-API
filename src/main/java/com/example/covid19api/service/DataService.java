@@ -3,21 +3,13 @@ package com.example.covid19api.service;
 import com.example.covid19api.parsers.ActualParser;
 import com.example.covid19api.parsers.HistoryParser;
 import com.example.covid19api.parsers.LocationParser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DataService {
-    private final ActualParser actualParser;
-    private final LocationParser locationParser;
-    private final HistoryParser historyParser;
-
-    @Autowired
-    public DataService(ActualParser actualParser, LocationParser locationParser, HistoryParser historyParser) {
-        this.actualParser = actualParser;
-        this.locationParser = locationParser;
-        this.historyParser = historyParser;
-    }
+    private ActualParser actualParser = new ActualParser();
+    private LocationParser locationParser = new LocationParser();
+    private HistoryParser historyParser = new HistoryParser();
 
     public String getActualData() {
         return actualParser.parseData();
