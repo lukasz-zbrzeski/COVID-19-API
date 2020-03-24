@@ -10,11 +10,11 @@ public class Actual {
     public Actual() {
     }
 
-    public Actual(int confirmed, int deaths, int recovered, int existing) {
+    public Actual(int confirmed, int deaths, int recovered, int active) {
         data.put("confirmed", confirmed);
         data.put("deaths", deaths);
         data.put("recovered", recovered);
-        data.put("existing", existing);
+        data.put("active", active);
     }
 
     public Map<String, Integer> getData() {

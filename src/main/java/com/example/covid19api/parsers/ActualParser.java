@@ -22,6 +22,7 @@ public class ActualParser {
         int totalConfirmed = 0;
         int totalDeaths = 0;
         int totalRecovered = 0;
+        int totalActive = 0;
 
         StringReader stringReader = new StringReader(data.getActualData());
 
@@ -32,6 +33,7 @@ public class ActualParser {
                 totalConfirmed += Integer.parseInt(strings.get("Confirmed"));
                 totalDeaths += Integer.parseInt(strings.get("Deaths"));
                 totalRecovered += Integer.parseInt(strings.get("Recovered"));
+                totalActive += Integer.parseInt(strings.get("Active"));
             }
 
         } catch (IOException e) {
@@ -42,7 +44,7 @@ public class ActualParser {
                 totalConfirmed,
                 totalDeaths,
                 totalRecovered,
-                totalConfirmed - (totalDeaths + totalRecovered)
+                totalActive
         );
         return gson.toJson(model);
     }

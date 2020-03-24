@@ -27,6 +27,7 @@ public class LocationParser {
     private List<Integer> confirmedCases = new ArrayList<>();
     private List<Integer> deathCases = new ArrayList<>();
     private List<Integer> recoveredCases = new ArrayList<>();
+    private List<Integer> activeCases = new ArrayList<>();
 
     public String parseData(int index) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -45,6 +46,7 @@ public class LocationParser {
                 confirmedCases.add(Integer.parseInt(strings.get("Confirmed")));
                 deathCases.add(Integer.parseInt(strings.get("Deaths")));
                 recoveredCases.add(Integer.parseInt(strings.get("Recovered")));
+                activeCases.add(Integer.parseInt(strings.get("Active")));
             }
             
         } catch (IOException e) {
@@ -60,7 +62,7 @@ public class LocationParser {
                 confirmedCases.get(index),
                 deathCases.get(index),
                 recoveredCases.get(index),
-                confirmedCases.get(index) - (deathCases.get(index) + recoveredCases.get(index))
+                activeCases.get(index)
         );
         return gson.toJson(model);
     }

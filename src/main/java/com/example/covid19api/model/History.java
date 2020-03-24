@@ -12,13 +12,13 @@ public class History {
     public History() {
     }
 
-    public History(String date, int confirmed, int deaths, int recovered, int existing) {
+    public History(String date, int confirmed, int deaths, int recovered, int active) {
         this.date = date;
 
         data.put("confirmed", confirmed);
         data.put("deaths", deaths);
         data.put("recovered", recovered);
-        data.put("existing", existing);
+        data.put("active", active);
     }
 
     public String getDate() {
