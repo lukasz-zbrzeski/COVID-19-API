@@ -38,11 +38,11 @@ public class LocationParser {
             CSVParser parser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(stringReader);
 
             for (CSVRecord strings : parser) {
-                lastUpdates.add(strings.get("Last Update"));
-                countries.add(strings.get("Country/Region"));
-                regions.add(strings.get("Province/State"));
-                lats.add(Double.parseDouble(strings.get("Latitude")));
-                lons.add(Double.parseDouble(strings.get("Longitude")));
+                lastUpdates.add(strings.get("Last_Update"));
+                countries.add(strings.get("Country_Region"));
+                regions.add(strings.get("Province_State"));
+                lats.add(Double.parseDouble(strings.get("Lat")));
+                lons.add(Double.parseDouble(strings.get("Long_")));
                 confirmedCases.add(Integer.parseInt(strings.get("Confirmed")));
                 deathCases.add(Integer.parseInt(strings.get("Deaths")));
                 recoveredCases.add(Integer.parseInt(strings.get("Recovered")));
