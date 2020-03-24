@@ -20,10 +20,10 @@ GET /api/actual
 ```json
 {
   "data": {
-    "confirmed": 335957,
-    "deaths": 14634,
-    "existing": 223441,
-    "recovered": 97882
+    "active": 215654,
+    "confirmed": 378287,
+    "deaths": 16497,
+    "recovered": 100958
   }
 }
 ```
@@ -44,19 +44,19 @@ GET /api/actual/location?country={country}&region={region}
 ##### Output
 ```json
 {
-  "last_update": "2020-03-22T22:13:28",
+  "last_update": "2020-03-23 23:19:34",
   "location": {
     "country": "US",
     "region": "California"
   },
   "coordinates": {
-    "lat": 36.1162,
-    "lon": -119.6816
+    "lat": 39.26255932,
+    "lon": -121.35356440000001
   },
   "data": {
-    "confirmed": 1642,
-    "deaths": 30,
-    "existing": 1612,
+    "active": 3,
+    "confirmed": 3,
+    "deaths": 0,
     "recovered": 0
   }
 }
@@ -74,13 +74,16 @@ GET /api/history/{MM-dd-yyyy}
 {
   "date": "03-10-2020",
   "data": {
+    "active": 49916,
     "confirmed": 118582,
     "deaths": 4262,
-    "existing": 49916,
     "recovered": 64404
   }
 }
 ```
+
+## Data source
+[2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE](https://github.com/CSSEGISandData/COVID-19)
 
 ## License
 [MIT](LICENSE)
