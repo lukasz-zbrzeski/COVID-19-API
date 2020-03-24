@@ -3,25 +3,20 @@ package com.example.covid19api.service;
 import com.example.covid19api.parsers.ActualParser;
 import com.example.covid19api.parsers.HistoryParser;
 import com.example.covid19api.parsers.LocationParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DataService {
-    private final ActualParser actualParser = new ActualParser();
-    private final LocationParser locationParser = new LocationParser();
-    private final HistoryParser historyParser = new HistoryParser();
+    private final ActualParser actualParser;
+    private final LocationParser locationParser;
+    private final HistoryParser historyParser;
 
-    private int getIndex(String country, String region) {
-        int index = 0;
-        for (int i = 0; i < locationParser.getCountries().size(); i++) {
-            if (
-                    (country.equals(locationParser.getCountries().get(i))
-                            && (region.equals(locationParser.getRegions().get(i)))
-                    )) {
-                index = i;
-            }
-        }
-        return index;
+    @Autowired
+    public DataService(ActualParser actualParser, LocationParser locationParser, HistoryParser historyParser) {
+        this.actualParser = actualParser;
+        this.locationParser = locationParser;
+        this.historyParser = historyParser;
     }
 
     public String getActualData() {
@@ -42,5 +37,18 @@ public class DataService {
 
     public String getHistoricalData(String date) {
         return historyParser.parseData(date);
+    }
+
+    private int getIndex(String country, String region) {
+        int index = 0;
+        for (int i = 0; i < locationParser.getCountries().size(); i++) {
+            if (
+                    (country.equals(locationParser.getCountries().get(i))
+                            && (region.equals(locationParser.getRegions().get(i)))
+                    )) {
+                index = i;
+            }
+        }
+        return index;
     }
 }
