@@ -20,6 +20,7 @@ public class LocationParser {
     private List<String> lastUpdates = new ArrayList<>();
     private List<String> countries = new ArrayList<>();
     private List<String> regions = new ArrayList<>();
+    private List<String> cities = new ArrayList<>();
     private List<Double> lats = new ArrayList<>();
     private List<Double> lons = new ArrayList<>();
     private List<Integer> confirmedCases = new ArrayList<>();
@@ -39,6 +40,7 @@ public class LocationParser {
                 lastUpdates.add(strings.get("Last_Update"));
                 countries.add(strings.get("Country_Region"));
                 regions.add(strings.get("Province_State"));
+                cities.add(strings.get("Admin2")); // That's the name of cities header
                 lats.add(Double.parseDouble(strings.get("Lat")));
                 lons.add(Double.parseDouble(strings.get("Long_")));
                 confirmedCases.add(Integer.parseInt(strings.get("Confirmed")));
@@ -55,6 +57,7 @@ public class LocationParser {
                 lastUpdates.get(index),
                 countries.get(index),
                 regions.get(index),
+                cities.get(index),
                 lats.get(index),
                 lons.get(index),
                 confirmedCases.get(index),
@@ -75,6 +78,10 @@ public class LocationParser {
 
     public List<String> getRegions() {
         return regions;
+    }
+
+    public List<String> getCities() {
+        return cities;
     }
 
     public List<Double> getLats() {
