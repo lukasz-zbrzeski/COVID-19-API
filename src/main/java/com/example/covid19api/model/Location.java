@@ -9,14 +9,14 @@ public class Location {
 
     private final Map<String, String> location = new TreeMap<>();
 
-    private final Map<String, Double> coordinates = new TreeMap<>();
+    private final Map<String, String> coordinates = new TreeMap<>();
 
     private final Map<String, Integer> data = new TreeMap<>();
 
     public Location() {
     }
 
-    public Location(String last_update, String country, String region, String city, double lat, double lon, int confirmed, int deaths, int recovered, int active) {
+    public Location(String last_update, String country, String region, String city, String lat, String lon, int confirmed, int deaths, int recovered, int active) {
         this.last_update = last_update;
 
         location.put("country", country);
@@ -40,7 +40,7 @@ public class Location {
         return location;
     }
 
-    public Map<String, Double> getCoordinates() {
+    public Map<String, String> getCoordinates() {
         return coordinates;
     }
 

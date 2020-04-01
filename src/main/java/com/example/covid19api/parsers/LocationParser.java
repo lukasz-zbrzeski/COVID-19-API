@@ -21,8 +21,8 @@ public class LocationParser {
     private List<String> countries = new ArrayList<>();
     private List<String> regions = new ArrayList<>();
     private List<String> cities = new ArrayList<>();
-    private List<Double> lats = new ArrayList<>();
-    private List<Double> lons = new ArrayList<>();
+    private List<String> lats = new ArrayList<>();
+    private List<String> lons = new ArrayList<>();
     private List<Integer> confirmedCases = new ArrayList<>();
     private List<Integer> deathCases = new ArrayList<>();
     private List<Integer> recoveredCases = new ArrayList<>();
@@ -41,8 +41,8 @@ public class LocationParser {
                 countries.add(strings.get("Country_Region"));
                 regions.add(strings.get("Province_State"));
                 cities.add(strings.get("Admin2")); // That's the name of cities header
-                lats.add(Double.parseDouble(strings.get("Lat")));
-                lons.add(Double.parseDouble(strings.get("Long_")));
+                lats.add(strings.get("Lat"));
+                lons.add(strings.get("Long_"));
                 confirmedCases.add(Integer.parseInt(strings.get("Confirmed")));
                 deathCases.add(Integer.parseInt(strings.get("Deaths")));
                 recoveredCases.add(Integer.parseInt(strings.get("Recovered")));
@@ -84,11 +84,11 @@ public class LocationParser {
         return cities;
     }
 
-    public List<Double> getLats() {
+    public List<String> getLats() {
         return lats;
     }
 
-    public List<Double> getLons() {
+    public List<String> getLons() {
         return lons;
     }
 
