@@ -20,10 +20,10 @@ GET /api/actual
 ```json
 {
   "data": {
-    "active": 215654,
-    "confirmed": 378287,
-    "deaths": 16497,
-    "recovered": 100958
+    "active": 1820433,
+    "confirmed": 2811193,
+    "deaths": 197159,
+    "recovered": 793601
   }
 }
 ```
@@ -35,28 +35,29 @@ GET /api/actual
 GET /api/actual/location?country={country}
 ```
 ```http
-GET /api/actual/location?region={region}
+GET /api/actual/location?country={country}&region={region}
 ```
 ```http
-GET /api/actual/location?country={country}&region={region}
+GET /api/actual/location?country={country}&region={region}&city={city}
 ```
 
 ##### Output
 ```json
 {
-  "last_update": "2020-03-23 23:19:34",
+  "last_update": "2020-04-25 06:30:53",
   "location": {
+    "city": "Los Angeles",
     "country": "US",
     "region": "California"
   },
   "coordinates": {
-    "lat": 39.26255932,
-    "lon": -121.35356440000001
+    "lat": "34.30828379",
+    "lon": "-118.2282411"
   },
   "data": {
-    "active": 3,
-    "confirmed": 3,
-    "deaths": 0,
+    "active": 17695,
+    "confirmed": 18545,
+    "deaths": 850,
     "recovered": 0
   }
 }
@@ -66,7 +67,7 @@ GET /api/actual/location?country={country}&region={region}
 
 ##### Request
 ```http
-GET /api/history/{MM-dd-yyyy}
+GET /api/history/{MM-dd-yyyy}/
 ```
 
 ##### Output
