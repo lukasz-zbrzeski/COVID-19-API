@@ -1,12 +1,13 @@
 package com.example.covid19api.controller;
 
+import com.example.covid19api.parsers.strategy.ActualParserStrategy;
+import com.example.covid19api.parsers.strategy.HistoryParserStrategy;
+import com.example.covid19api.parsers.strategy.LocationParserStrategy;
+import com.example.covid19api.parsers.strategy.ParserContext;
 import com.example.covid19api.service.DataService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
-import java.util.TreeMap;
 
 @RestController
 @RequestMapping("/api")
@@ -15,6 +16,8 @@ public class DataController {
 
     private final DataService dataService;
 
+    private final ParserContext context = new ParserContext();
+
     @Autowired
     public DataController(DataService dataService) {
         this.dataService = dataService;
@@ -22,26 +25,20 @@ public class DataController {
 
     @GetMapping("/actual")
     public String actual() {
-        return dataService.getActualData();
+        return context.getData(null, null, null, null, new ActualParserStrategy());
     }
 
     @GetMapping("/actual/location")
-    public String searchActualDataByLocation(@RequestParam(required = false) String country, @RequestParam(required = false) String region) {
-        if (country != null && region != null) {
-            return this.dataService.searchDataByCountryAndRegion(country, region);
-        } else if (country != null) {
-            return this.dataService.searchDataByCountry(country);
-        } else if (region != null) {
-            return this.dataService.searchDataByRegion(region);
-        } else {
-            Map<String, String> errorMessage = new TreeMap<>();
-            errorMessage.put("message", "Data not found!");
-            return gson.toJson(errorMessage);
-        }
+    public String searchActualDataByLocation(
+            @RequestParam(defaultValue = "") String country,
+            @RequestParam(defaultValue = "") String region,
+            @RequestParam(defaultValue = "") String city
+    ) {
+        return context.getData(country, region, city, null, new LocationParserStrategy());
     }
 
     @GetMapping("/history/{date}")
     public String history(@PathVariable String date) {
-        return dataService.getHistoricalData(date);
+        return context.getData(null, null, null, date, new HistoryParserStrategy());
     }
 }
