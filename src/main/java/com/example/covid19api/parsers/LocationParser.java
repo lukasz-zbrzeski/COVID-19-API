@@ -28,7 +28,8 @@ public class LocationParser {
     private List<Integer> recoveredCases = new ArrayList<>();
     private List<Integer> activeCases = new ArrayList<>();
 
-    public String parseData(int index) {
+    public String parseData(String country, String region, String city) {
+
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         StringReader stringReader = new StringReader(data.getActualData());
@@ -53,19 +54,62 @@ public class LocationParser {
             e.printStackTrace();
         }
 
-        Location model = new Location(
-                lastUpdates.get(index),
-                countries.get(index),
-                regions.get(index),
-                cities.get(index),
-                lats.get(index),
-                lons.get(index),
-                confirmedCases.get(index),
-                deathCases.get(index),
-                recoveredCases.get(index),
-                activeCases.get(index)
-        );
+        int indexOfCountry = linearSearch(countries, country);
+        int indexOfRegion = linearSearch(regions, region);
+        int indexOfCity = linearSearch(cities, city);
+
+        Location model = null;
+
+        if (!(country.equals("")) && region.equals("") && city.equals("")) {
+            model = new Location(
+                    lastUpdates.get(indexOfCountry),
+                    countries.get(indexOfCountry),
+                    regions.get(indexOfCountry),
+                    cities.get(indexOfCountry),
+                    lats.get(indexOfCountry),
+                    lons.get(indexOfCountry),
+                    confirmedCases.get(indexOfCountry),
+                    deathCases.get(indexOfCountry),
+                    recoveredCases.get(indexOfCountry),
+                    activeCases.get(indexOfCountry)
+            );
+        } else if (!(country.equals("")) && !(region.equals("")) && city.equals("")) {
+            model = new Location(
+                    lastUpdates.get(indexOfRegion),
+                    countries.get(indexOfRegion),
+                    regions.get(indexOfRegion),
+                    cities.get(indexOfRegion),
+                    lats.get(indexOfRegion),
+                    lons.get(indexOfRegion),
+                    confirmedCases.get(indexOfRegion),
+                    deathCases.get(indexOfRegion),
+                    recoveredCases.get(indexOfRegion),
+                    activeCases.get(indexOfRegion)
+            );
+        } else if (!(country.equals("")) && !(region.equals("")) && !(city.equals(""))) {
+            model = new Location(
+                    lastUpdates.get(indexOfCity),
+                    countries.get(indexOfCity),
+                    regions.get(indexOfCity),
+                    cities.get(indexOfCity),
+                    lats.get(indexOfCity),
+                    lons.get(indexOfCity),
+                    confirmedCases.get(indexOfCity),
+                    deathCases.get(indexOfCity),
+                    recoveredCases.get(indexOfCity),
+                    activeCases.get(indexOfCity)
+            );
+        }
         return gson.toJson(model);
+    }
+
+    private int linearSearch(List<String> list, String elementToSearch) {
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals(elementToSearch))
+                return i;
+        }
+        return -1;
     }
 
     public List<String> getLastUpdates() {
