@@ -4,24 +4,12 @@ import com.example.covid19api.parsers.strategy.ActualParserStrategy;
 import com.example.covid19api.parsers.strategy.HistoryParserStrategy;
 import com.example.covid19api.parsers.strategy.LocationParserStrategy;
 import com.example.covid19api.parsers.strategy.ParserContext;
-import com.example.covid19api.service.DataService;
-import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
 public class DataController {
-    private final Gson gson = new Gson();
-
-    private final DataService dataService;
-
     private final ParserContext context = new ParserContext();
-
-    @Autowired
-    public DataController(DataService dataService) {
-        this.dataService = dataService;
-    }
 
     @GetMapping("/actual")
     public String actual() {
