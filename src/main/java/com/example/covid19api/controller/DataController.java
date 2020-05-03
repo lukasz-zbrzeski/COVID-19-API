@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.*;
 public class DataController {
     private final ParserContext context = new ParserContext();
 
-    @GetMapping("/actual")
-    public String actual() {
+    @RequestMapping(value = "/actual", method = RequestMethod.GET)
+    @ResponseBody
+    public String searchActualData() {
         return context.getData(null, null, null, null, new ActualParserStrategy());
     }
 
-    @GetMapping("/actual/location")
+    @RequestMapping(value = "/actual/location", method = RequestMethod.GET)
+    @ResponseBody
     public String searchActualDataByLocation(
             @RequestParam(defaultValue = "") String country,
             @RequestParam(defaultValue = "") String region,
@@ -25,8 +27,9 @@ public class DataController {
         return context.getData(country, region, city, null, new LocationParserStrategy());
     }
 
-    @GetMapping("/history/{date}")
-    public String history(@PathVariable String date) {
+    @RequestMapping(value = "/history/{date}", method = RequestMethod.GET)
+    @ResponseBody
+    public String searchHistoryData(@PathVariable String date) {
         return context.getData(null, null, null, date, new HistoryParserStrategy());
     }
 }
