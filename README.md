@@ -91,7 +91,7 @@ GET /api/history/{MM-dd-yyyy}/
 ```
 
 ## Data source
-[2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE](https://github.com/CSSEGISandData/COVID-19)
+[COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19)
 
 ## License
 [MIT](LICENSE)
