@@ -2,7 +2,6 @@ package com.example.covid19api.parsers;
 
 import com.example.covid19api.data.Data;
 import com.example.covid19api.model.Location;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -17,21 +16,48 @@ public class LocationParser {
     private final Data data = new Data();
 
     // Containers for records
-    private List<String> lastUpdates = new ArrayList<>();
-    private List<String> countries = new ArrayList<>();
-    private List<String> regions = new ArrayList<>();
-    private List<String> cities = new ArrayList<>();
-    private List<String> lats = new ArrayList<>();
-    private List<String> lons = new ArrayList<>();
-    private List<Integer> confirmedCases = new ArrayList<>();
-    private List<Integer> deathCases = new ArrayList<>();
-    private List<Integer> recoveredCases = new ArrayList<>();
-    private List<Integer> activeCases = new ArrayList<>();
+    private final List<String> lastUpdates = new ArrayList<>();
+    private final List<String> countries = new ArrayList<>();
+    private final List<String> regions = new ArrayList<>();
+    private final List<String> cities = new ArrayList<>();
+    private final List<String> lats = new ArrayList<>();
+    private final List<String> lons = new ArrayList<>();
+    private final List<Integer> confirmedCases = new ArrayList<>();
+    private final List<Integer> deathCases = new ArrayList<>();
+    private final List<Integer> recoveredCases = new ArrayList<>();
+    private final List<Integer> activeCases = new ArrayList<>();
 
     public String parseData(String country, String region, String city) {
+        getData();
+        return new GsonBuilder().setPrettyPrinting().create().toJson(getModel(country, region, city));
+    }
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Location getModel(String country, String region, String city) {
+        int index = 0;
 
+        if (!(country.equals("")) && region.equals("") && city.equals("")) {
+            index = linearSearch(countries, country);
+        } else if (!(country.equals("")) && !(region.equals("")) && city.equals("")) {
+            index = linearSearch(regions, region);
+        } else if (!(country.equals("")) && !(region.equals("")) && !(city.equals(""))) {
+            index = linearSearch(cities, city);
+        }
+
+        return new Location(
+                lastUpdates.get(index),
+                countries.get(index),
+                regions.get(index),
+                cities.get(index),
+                lats.get(index),
+                lons.get(index),
+                confirmedCases.get(index),
+                deathCases.get(index),
+                recoveredCases.get(index),
+                activeCases.get(index)
+        );
+    }
+
+    private void getData() {
         StringReader stringReader = new StringReader(data.getActualData());
 
         try {
@@ -49,58 +75,10 @@ public class LocationParser {
                 recoveredCases.add(Integer.parseInt(strings.get("Recovered")));
                 activeCases.add(Integer.parseInt(strings.get("Active")));
             }
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        int indexOfCountry = linearSearch(countries, country);
-        int indexOfRegion = linearSearch(regions, region);
-        int indexOfCity = linearSearch(cities, city);
-
-        Location model = null;
-
-        if (!(country.equals("")) && region.equals("") && city.equals("")) {
-            model = new Location(
-                    lastUpdates.get(indexOfCountry),
-                    countries.get(indexOfCountry),
-                    regions.get(indexOfCountry),
-                    cities.get(indexOfCountry),
-                    lats.get(indexOfCountry),
-                    lons.get(indexOfCountry),
-                    confirmedCases.get(indexOfCountry),
-                    deathCases.get(indexOfCountry),
-                    recoveredCases.get(indexOfCountry),
-                    activeCases.get(indexOfCountry)
-            );
-        } else if (!(country.equals("")) && !(region.equals("")) && city.equals("")) {
-            model = new Location(
-                    lastUpdates.get(indexOfRegion),
-                    countries.get(indexOfRegion),
-                    regions.get(indexOfRegion),
-                    cities.get(indexOfRegion),
-                    lats.get(indexOfRegion),
-                    lons.get(indexOfRegion),
-                    confirmedCases.get(indexOfRegion),
-                    deathCases.get(indexOfRegion),
-                    recoveredCases.get(indexOfRegion),
-                    activeCases.get(indexOfRegion)
-            );
-        } else if (!(country.equals("")) && !(region.equals("")) && !(city.equals(""))) {
-            model = new Location(
-                    lastUpdates.get(indexOfCity),
-                    countries.get(indexOfCity),
-                    regions.get(indexOfCity),
-                    cities.get(indexOfCity),
-                    lats.get(indexOfCity),
-                    lons.get(indexOfCity),
-                    confirmedCases.get(indexOfCity),
-                    deathCases.get(indexOfCity),
-                    recoveredCases.get(indexOfCity),
-                    activeCases.get(indexOfCity)
-            );
-        }
-        return gson.toJson(model);
     }
 
     private int linearSearch(List<String> list, String elementToSearch) {
@@ -110,41 +88,5 @@ public class LocationParser {
                 return i;
         }
         return -1;
-    }
-
-    public List<String> getLastUpdates() {
-        return lastUpdates;
-    }
-
-    public List<String> getCountries() {
-        return countries;
-    }
-
-    public List<String> getRegions() {
-        return regions;
-    }
-
-    public List<String> getCities() {
-        return cities;
-    }
-
-    public List<String> getLats() {
-        return lats;
-    }
-
-    public List<String> getLons() {
-        return lons;
-    }
-
-    public List<Integer> getConfirmedCases() {
-        return confirmedCases;
-    }
-
-    public List<Integer> getDeathCases() {
-        return deathCases;
-    }
-
-    public List<Integer> getRecoveredCases() {
-        return recoveredCases;
     }
 }
