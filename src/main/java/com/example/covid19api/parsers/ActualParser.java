@@ -1,19 +1,27 @@
 package com.example.covid19api.parsers;
 
-import com.example.covid19api.data.Data;
 import com.example.covid19api.model.Actual;
+import com.example.covid19api.service.DataService;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ActualParser {
-    private final Data data = new Data();
+    private final DataService dataService;
+
+    @Autowired
+    public ActualParser(DataService dataService) {
+        this.dataService = dataService;
+    }
 
     public String parseData() {
         return new GsonBuilder().setPrettyPrinting().create().toJson(getModel());
@@ -29,7 +37,7 @@ public class ActualParser {
     }
 
     private List<Integer> getData() {
-        StringReader stringReader = new StringReader(data.getActualData());
+        StringReader stringReader = new StringReader(dataService.getActualData());
 
         List<Integer> listOfTotalCases = new ArrayList<>();
 

@@ -1,19 +1,27 @@
 package com.example.covid19api.parsers;
 
-import com.example.covid19api.data.Data;
 import com.example.covid19api.model.History;
+import com.example.covid19api.service.DataService;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class HistoryParser {
-    private final Data data = new Data();
+    private final DataService dataService;
+
+    @Autowired
+    public HistoryParser(DataService dataService) {
+        this.dataService = dataService;
+    }
 
     public String parseData(String date) {
         return new GsonBuilder().setPrettyPrinting().create().toJson(getModel(date));
@@ -30,7 +38,7 @@ public class HistoryParser {
     }
 
     private List<Integer> getData(String date) {
-        StringReader stringReader = new StringReader(data.getHistoricalData(date));
+        StringReader stringReader = new StringReader(dataService.getHistoricalData(date));
 
         List<Integer> listOfTotalCases = new ArrayList<>();
 
