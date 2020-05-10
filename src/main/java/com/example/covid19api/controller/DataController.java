@@ -17,7 +17,7 @@ public class DataController {
     @RequestMapping(value = "/actual", method = RequestMethod.GET)
     @ResponseBody
     public String searchActualData() {
-        return context.getData(null, null, null, null, context.findStrategy(StrategyName.ACTUAL_PARSER_STRATEGY));
+        return context.getData(null, null, null, null, StrategyName.ACTUAL_PARSER_STRATEGY);
     }
 
     @RequestMapping(value = "/actual/location", method = RequestMethod.GET)
@@ -27,12 +27,12 @@ public class DataController {
             @RequestParam(defaultValue = "") String region,
             @RequestParam(defaultValue = "") String city
     ) {
-        return context.getData(country, region, city, null, context.findStrategy(StrategyName.LOCATION_PARSER_STRATEGY));
+        return context.getData(country, region, city, null, StrategyName.LOCATION_PARSER_STRATEGY);
     }
 
     @RequestMapping(value = "/history/{date}", method = RequestMethod.GET)
     @ResponseBody
     public String searchHistoryData(@PathVariable String date) {
-        return context.getData(null, null, null, date, context.findStrategy(StrategyName.HISTORY_PARSER_STRATEGY));
+        return context.getData(null, null, null, date, StrategyName.HISTORY_PARSER_STRATEGY);
     }
 }
