@@ -1,13 +1,13 @@
 # Coronavirus COVID-19 API
 
-API displays global statistics for COVID-19 (confirmed cases, deaths cases, recovered cases and existing cases), statistics for location (country, region, city) and searching historical data about COVID-19 cases.
+API displays global statistics for COVID-19 (confirmed cases, deaths cases, recovered cases and actual cases), statistics for location (country, region, city) and searching historical data about COVID-19 cases.
 
 ## Technologies
 Project is created with:
 * Java 8
 * Spring Boot 2.2.5
 * Apache Commons CSV 1.8
-* GSON 2.8.6
+* Jackson 2.10.2
 
 ## Endpoints
 
