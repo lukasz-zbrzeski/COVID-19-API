@@ -2,7 +2,8 @@ package com.example.covid19api.parsers;
 
 import com.example.covid19api.model.History;
 import com.example.covid19api.service.DataService;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -24,7 +25,12 @@ public class HistoryParser {
     }
 
     public String parseData(String date) {
-        return new GsonBuilder().setPrettyPrinting().create().toJson(getModel(date));
+        try {
+            return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(getModel(date));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private History getModel(String date) {

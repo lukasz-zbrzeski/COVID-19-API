@@ -2,7 +2,8 @@ package com.example.covid19api.parsers;
 
 import com.example.covid19api.model.Actual;
 import com.example.covid19api.service.DataService;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -24,7 +25,12 @@ public class ActualParser {
     }
 
     public String parseData() {
-        return new GsonBuilder().setPrettyPrinting().create().toJson(getModel());
+        try {
+            return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(getModel());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private Actual getModel() {

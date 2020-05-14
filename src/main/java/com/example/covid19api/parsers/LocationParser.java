@@ -2,7 +2,8 @@ package com.example.covid19api.parsers;
 
 import com.example.covid19api.model.Location;
 import com.example.covid19api.service.DataService;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -36,11 +37,17 @@ public class LocationParser {
     private final List<Integer> activeCases = new ArrayList<>();
 
     public String parseData(String country, String region, String city) {
-        getData();
-        return new GsonBuilder().setPrettyPrinting().create().toJson(getModel(country, region, city));
+        try {
+            return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(getModel(country, region, city));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private Location getModel(String country, String region, String city) {
+        getData();
+
         int index = 0;
 
         if (!(country.equals("")) && region.equals("") && city.equals("")) {
