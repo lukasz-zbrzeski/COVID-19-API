@@ -56,9 +56,9 @@ public class HistoryParser {
             CSVParser parser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(stringReader);
 
             for (CSVRecord strings : parser) {
-                totalConfirmed += Integer.parseInt(strings.get("Confirmed"));
-                totalDeaths += Integer.parseInt(strings.get("Deaths"));
-                totalRecovered += Integer.parseInt(strings.get("Recovered"));
+                totalConfirmed += Integer.parseInt(strings.get("Confirmed").replaceFirst("", "0"));
+                totalDeaths += Integer.parseInt(strings.get("Deaths").replaceFirst("", "0"));
+                totalRecovered += Integer.parseInt(strings.get("Recovered").replaceFirst("", "0"));
             }
 
         } catch (IOException e) {
